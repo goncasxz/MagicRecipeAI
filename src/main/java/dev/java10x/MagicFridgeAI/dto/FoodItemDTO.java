@@ -13,7 +13,7 @@ public class FoodItemDTO {
 
     private Long id;
     private String nome;
-    private Enum<FoodItemCategory> categoryEnum;
+    private FoodItemCategory categoryEnum;
     private Integer quantidade;
     private LocalDateTime validade;
 
@@ -34,11 +34,11 @@ public class FoodItemDTO {
         this.nome = nome;
     }
 
-    public Enum<FoodItemCategory> getCategoryEnum() {
+    public FoodItemCategory getCategoryEnum() {
         return categoryEnum;
     }
 
-    public void setCategoryEnum(Enum<FoodItemCategory> categoryEnum) {
+    public void setCategoryEnum(FoodItemCategory categoryEnum) {
         this.categoryEnum = categoryEnum;
     }
 

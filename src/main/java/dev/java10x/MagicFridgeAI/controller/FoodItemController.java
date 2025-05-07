@@ -32,7 +32,7 @@ public class FoodItemController {
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity<?> listarId(@PathVariable Long id){
+    public ResponseEntity<Object> listarId(@PathVariable Long id){
         Optional<FoodItemDTO> foodItemDTOOptional = foodItemService.listarId(id);
         if (foodItemDTOOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK)

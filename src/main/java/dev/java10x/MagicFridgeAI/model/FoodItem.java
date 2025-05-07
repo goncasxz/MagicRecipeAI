@@ -21,8 +21,9 @@ public class FoodItem {
     @Column(name = "nome")
     private String nome;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "categoria")
-    private Enum<FoodItemCategory> categoryEnum;
+    private FoodItemCategory categoryEnum;
 
     @Column(name = "quantidade")
     private Integer quantidade;
@@ -47,11 +48,11 @@ public class FoodItem {
         this.nome = nome;
     }
 
-    public Enum<FoodItemCategory> getCategoryEnum() {
+    public FoodItemCategory getCategoryEnum() {
         return categoryEnum;
     }
 
-    public void setCategoryEnum(Enum<FoodItemCategory> categoryEnum) {
+    public void setCategoryEnum(FoodItemCategory categoryEnum) {
         this.categoryEnum = categoryEnum;
     }
 
