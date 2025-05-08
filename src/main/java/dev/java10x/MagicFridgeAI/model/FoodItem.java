@@ -1,14 +1,13 @@
 package dev.java10x.MagicFridgeAI.model;
 
-import dev.java10x.MagicFridgeAI.FoodItemCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "food_item")
+@Table(name = "food")
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodItem {
@@ -29,7 +28,7 @@ public class FoodItem {
     private Integer quantidade;
 
     @Column(name = "validade")
-    private LocalDateTime validade;
+    private LocalDate validade;
 
 
     public Long getId() {
@@ -64,11 +63,11 @@ public class FoodItem {
         this.quantidade = quantidade;
     }
 
-    public LocalDateTime getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(LocalDateTime validade) {
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
 }

@@ -1,11 +1,10 @@
 package dev.java10x.MagicFridgeAI.dto;
 
-import dev.java10x.MagicFridgeAI.FoodItemCategory;
-import jakarta.persistence.*;
+import dev.java10x.MagicFridgeAI.model.FoodItemCategory;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,8 +14,7 @@ public class FoodItemDTO {
     private String nome;
     private FoodItemCategory categoryEnum;
     private Integer quantidade;
-    private LocalDateTime validade;
-
+    private LocalDate validade;
 
     public Long getId() {
         return id;
@@ -50,11 +48,11 @@ public class FoodItemDTO {
         this.quantidade = quantidade;
     }
 
-    public LocalDateTime getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(LocalDateTime validade) {
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
 }

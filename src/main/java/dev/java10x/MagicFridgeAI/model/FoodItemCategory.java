@@ -1,4 +1,4 @@
-package dev.java10x.MagicFridgeAI;
+package dev.java10x.MagicFridgeAI.model;
 
 public enum FoodItemCategory {
     VEGETAIS,
