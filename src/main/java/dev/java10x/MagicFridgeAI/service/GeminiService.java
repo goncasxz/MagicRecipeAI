@@ -27,7 +27,7 @@ public class GeminiService {
                 .map(item -> String.format("%s (%s) - Quantidade: %d, Validade: %s", item.getNome(), item.getCategoryEnum(), item.getQuantidade(), item.getValidade()))
                 .collect(Collectors.joining("\n"));
 
-        String prompt = "Me sugira uma receita com os seguintes ingredientes " + alimentos + "Liste os ingredientes utilizados, passando também a quantia necessária para receita e um passo a passo detalhado. Caso tenha algum ingrediente que não combine com a receita não utilize-o e nem cite na resposta:\n";
+        String prompt = "Me sugira uma receita com os seguintes ingredientes " + alimentos + "Liste os ingredientes utilizados, passando também a quantia necessária para receita e um passo a passo detalhado. Caso tenha algum ingrediente que não combine com a receita não utilize-o e nem cite na resposta. Outro ponto importante, leve a validade dos itens em consideração, priorizando itens próximos da validade:\n";
 
         Map<String, Object> requestBody = Map.of(
                 "contents", List.of(
