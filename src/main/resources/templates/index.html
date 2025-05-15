@@ -177,8 +177,10 @@
             color: #222;
             background-color: #fefefe;
             box-shadow: 0 6px 18px rgb(15 76 129 / 0.15);
+            height: auto;
+            max-height: 70vh;
+            overflow-y: auto;
         }
-
 
         #loading {
             margin-top: 1.5rem;
@@ -197,7 +199,6 @@
             0% { transform: rotate(0deg);}
             100% { transform: rotate(360deg);}
         }
-
 
         @media (max-width: 768px) {
             body {
@@ -285,6 +286,12 @@
         }
     }
 
+    function ajustarAlturaRecipeBox() {
+        const box = document.getElementById('recipeResult');
+        box.style.height = 'auto';
+        box.style.height = box.scrollHeight + 'px';
+    }
+
     function gerarReceita() {
         const loading = document.getElementById("loading");
         const recipeResult = document.getElementById("recipeResult");
@@ -294,15 +301,15 @@
 
         fetch("/generate")
             .then(response => {
-                if (!response.ok) throw new Error('Erro na resposta');
+                if (!response.ok) throw new Error("Erro na resposta da API");
                 return response.text();
             })
-            .then(data => {
-                recipeResult.innerText = data;
+            .then(text => {
+                recipeResult.innerText = text;
+                ajustarAlturaRecipeBox();
             })
             .catch(err => {
-                console.error("Erro ao gerar receita:", err);
-                recipeResult.innerText = "Erro ao gerar receita.";
+                recipeResult.innerText = "Erro ao gerar receita: " + err.message;
             })
             .finally(() => {
                 loading.style.display = "none";
