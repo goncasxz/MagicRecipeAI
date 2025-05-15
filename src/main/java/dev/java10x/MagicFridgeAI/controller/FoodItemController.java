@@ -22,6 +22,7 @@ public class FoodItemController {
     @PostMapping("/criar")
     public ResponseEntity<FoodItemDTO> criar(@RequestBody FoodItemDTO foodItemDTO) {
         FoodItemDTO salvo = foodItemService.salvar(foodItemDTO);
+        System.out.println("Categoria recebida: " + foodItemDTO.getCategoryEnum());
         return ResponseEntity.ok(salvo);
     }
 

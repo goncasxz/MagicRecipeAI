@@ -1,5 +1,6 @@
 package dev.java10x.MagicFridgeAI.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.java10x.MagicFridgeAI.model.FoodItemCategory;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ public class FoodItemDTO {
 
     private Long id;
     private String nome;
+    @JsonProperty("categoria")
     private FoodItemCategory categoryEnum;
     private Integer quantidade;
     private LocalDate validade;
