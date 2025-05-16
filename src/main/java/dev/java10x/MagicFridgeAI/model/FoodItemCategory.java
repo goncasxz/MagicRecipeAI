@@ -4,7 +4,7 @@ public enum FoodItemCategory {
     VEGETAIS("vegetais"),
     FRUTAS("frutas"),
     CEREAIS("cereais"),
-    PROTEINAS("proteínas"),
+    PROTEÍNAS("proteínas"),
     LEITE("leite");
 
     private final String foodItemCategory;

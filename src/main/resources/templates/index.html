@@ -5,6 +5,7 @@
     <link rel="icon" href="../static/icon.svg" type="image/svg+xml" />
     <title>MagicRecipeAI</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         * {
             box-sizing: border-box;
@@ -86,14 +87,27 @@
         .ingredient-list li {
             padding: 0.75rem 1rem;
             border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 1rem;
             font-size: 1rem;
+            align-items: center;
         }
 
         .ingredient-list li:last-child {
             border-bottom: none;
+        }
+
+        .ingredient-headers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 1rem;
+            font-weight: bold;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #ccc;
+            background-color: #e9f0f7;
+            color: #0f4c81;
+            font-size: 1rem;
         }
 
         .modal {
@@ -187,6 +201,15 @@
             font-weight: bold;
         }
 
+        .ingredient-list a {
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .ingredient-list a:hover {
+            color: red;
+            }
+
         #loading {
             margin-top: 1.5rem;
             display: none;
@@ -232,17 +255,24 @@
 <div class="left">
     <h2>Ingredientes</h2>
     <button onclick="openModal()">Adicionar Ingrediente</button>
-    <button>Remover Ingrediente</button>
 
     <div class="ingredient-list">
         <h3>Lista de Ingredientes</h3>
+        <div class="ingredient-headers">
+            <div>Nome</div>
+            <div>Categoria</div>
+            <div>Quantidade</div>
+            <div>Validade</div>
+            <div>Ação</div>
+        </div>
         <ul>
             <li th:each="ingrediente : ${ingredientes}"
                 th:attr="data-validade=${#temporals.format(ingrediente.validade, 'yyyy-MM-dd')}">
-            <span th:text="${ingrediente.nome}">Nome</span> -
-                <span th:text="${ingrediente.categoryEnum}">Categoria</span> -
-                <span th:text="${ingrediente.quantidade}">Quantidade</span> -
-                <th:block th:text="${#temporals.format(ingrediente.validade, 'dd/MM/yyyy')}"></th:block>
+                <span th:text="${ingrediente.nome}">Nome</span>
+                <span th:text="${ingrediente.categoryEnum}">Categoria</span>
+                <span th:text="${ingrediente.quantidade}">Quantidade</span>
+                <span th:text="${#temporals.format(ingrediente.validade, 'dd/MM/yyyy')}">Validade</span>
+                <a th:href="@{/receitas/ui/deletar/{id}(id=${ingrediente.id})}" title="Deletar"><i class="bi bi-trash"></i></a>
             </li>
         </ul>
     </div>
@@ -280,15 +310,15 @@
 <script>
     function dataAtual() {
         const hoje = new Date().toISOString().split('T')[0];
-        document.getElementById('validade').setAttribute('min', hoje);
+        let inputValidade = document.getElementById('validade');
         if (inputValidade) {
-        inputValidade.setAttribute('min', hoje);
-    }
+            inputValidade.setAttribute('min', hoje);
+        }
     }
 
     function marcarIngredientesVencidos() {
-     const hoje = new Date();
-     const ingredientes = document.querySelectorAll('.ingredient-list ul li');
+        const hoje = new Date();
+        const ingredientes = document.querySelectorAll('.ingredient-list ul li');
 
         ingredientes.forEach(li => {
             const validadeStr = li.getAttribute('data-validade');
@@ -305,7 +335,6 @@
         dataAtual();
         marcarIngredientesVencidos();
     }
-
 
     function openModal() {
         document.getElementById("ingredientModal").style.display = "block";
